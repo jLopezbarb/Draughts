@@ -26,7 +26,7 @@ public class PlayView extends ConsoleView {
             target = getCoordinateFromString(userInput.substring(3, 5));
             error = playController.getErrorFromMovement(origin, target);
             if (error != null){
-                console.writeln(new ErrorView().getErrorMessage(error));
+                this.console.writeln(new ErrorView().getErrorMessage(error));
             }
         } while (error != null); 
         playController.move(origin, target);

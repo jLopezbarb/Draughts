@@ -17,7 +17,7 @@ import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 import es.urjccode.mastercloudapps.adcs.draughts.utils.Console;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CommandViewTest {
+public class PlayViewTest {
 
     @Mock
     PlayController playController;

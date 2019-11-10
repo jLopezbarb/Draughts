@@ -18,18 +18,18 @@ public class PlayView extends ConsoleView {
         String color = PlayView.COLORS[playController.getColor().ordinal()];
         Error error = null;
         GameView gameView = new GameView();
-        int origin; 
-        int target;
+        Coordinate origin; 
+        Coordinate target;
         do {
             String userInput = readProposedMovement(color);
-            origin = Integer.parseInt(userInput.substring(0, 2));
-            target = Integer.parseInt(userInput.substring(3, 5));
-            error = playController.getErrorFromMovement(getCoordinateFromInt(origin), getCoordinateFromInt(target));
+            origin = getCoordinateFromString(userInput.substring(0, 2));
+            target = getCoordinateFromString(userInput.substring(3, 5));
+            error = playController.getErrorFromMovement(origin, target);
             if (error != null){
                 console.writeln(new ErrorView().getErrorMessage(error));
             }
         } while (error != null); 
-        playController.move(getCoordinateFromInt(origin), getCoordinateFromInt(target));
+        playController.move(origin, target);
         gameView.write(playController);
         if (playController.isBlocked()){
             this.console.write(MessageView.LOOSER.getMessage());
@@ -40,8 +40,9 @@ public class PlayView extends ConsoleView {
         return MessageView.PROPOSE_MOVE.getMessage().replace("#color", color);
     }
 
-    private Coordinate getCoordinateFromInt(int number){
-        return new Coordinate(number/10-1, number%10-1);
+    private Coordinate getCoordinateFromString(String number){
+        int coordinate = Integer.parseInt(number);
+        return new Coordinate(coordinate/10-1, coordinate%10-1);
     }
 
     private String readProposedMovement(String color){

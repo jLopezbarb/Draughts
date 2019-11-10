@@ -19,7 +19,6 @@ class Board {
     }
 
     private Square getSquare(Coordinate coordinate){
-        assert coordinate!=null && coordinate.isValid();
         return this.squares[coordinate.getRow()][coordinate.getColumn()];
     }
 
@@ -29,7 +28,6 @@ class Board {
     }
 
     Piece remove(Coordinate coordinate) {
-        assert this.getPiece(coordinate) != null;
         return this.getSquare(coordinate).remove();
     }
 

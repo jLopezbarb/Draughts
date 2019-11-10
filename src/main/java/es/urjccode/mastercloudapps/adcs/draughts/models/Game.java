@@ -36,7 +36,7 @@ public class Game {
 		return null;
 	}
 
-	public Error move(Coordinate origin, Coordinate target) {
+	private Error getErrorInMovement(Coordinate origin, Coordinate target){
 		assert origin != null && target != null;
 		if (!origin.isValid() || !target.isValid()) {
 			return Error.OUT_COORDINATE;
@@ -44,8 +44,8 @@ public class Game {
 		if (board.isEmpty(origin)) {
 			return Error.EMPTY_ORIGIN;
 		}
-		Color color = this.board.getColor(origin);
-		if (this.turn.getColor() != color) {
+		Color pieceInOriginColor = this.board.getColor(origin);
+		if (this.turn.getColor() != pieceInOriginColor) {
 			return Error.OPPOSITE_PIECE;
 		}
 		if (!origin.isDiagonal(target)) {
@@ -66,6 +66,17 @@ public class Game {
 			if (this.board.getPiece(between) == null) {
 				return Error.EATING_EMPTY;
 			}
+		}
+		return null;
+	}
+
+	public Error move(Coordinate origin, Coordinate target) {
+		Error coordinateError = getErrorInMovement(origin, target);
+		if (coordinateError != null){
+			return coordinateError;
+		}
+		if (origin.diagonalDistance(target) == 2) {
+			Coordinate between = origin.betweenDiagonal(target);
 			this.board.remove(between);
 		}
 		this.board.move(origin, target);

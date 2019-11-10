@@ -18,7 +18,8 @@ public class PlayControllerTest {
         PlayController playController = new PlayController(new Session());
         Coordinate origin = new Coordinate(5, 0);
         Coordinate target = new Coordinate(4, 1);
-        assertNull(playController.move(origin, target));
+        assertNull(playController.getErrorFromMovement(origin, target));
+        playController.move(origin, target);
         assertNull(playController.getPiece(origin));
         Piece pieceTarget = playController.getPiece(target);
         assertNotNull(pieceTarget);

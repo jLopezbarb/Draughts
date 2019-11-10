@@ -12,12 +12,11 @@ public class PlayController extends Controller {
 		super(session);
 	}
 
-	public Error move(Coordinate origin, Coordinate target){
-		Error error = this.session.move(origin, target);
+	public void move(Coordinate origin, Coordinate target){
+		this.session.move(origin, target);
 		if (this.session.isBlocked()){
 			this.session.next();
 		}
-		return error;
     }
 
 	public Piece getPiece(Coordinate coordinate) {
@@ -35,6 +34,10 @@ public class PlayController extends Controller {
 	@Override
 	public void accept(ControllersVisitor controllersVisitor) {
 		controllersVisitor.visit(this);
+	}
+
+	public Error getErrorFromMovement(Coordinate origin, Coordinate target){
+		return this.session.getErrorFromMovement(origin, target);
 	}
 
 }

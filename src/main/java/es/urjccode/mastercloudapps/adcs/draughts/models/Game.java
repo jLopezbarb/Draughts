@@ -36,21 +36,16 @@ public class Game {
 		return null;
 	}
 
-	public Error move(Coordinate origin, Coordinate target) {
-		Error coordinateError = getErrorInMovement(origin, target);
-		if (coordinateError != null){
-			return coordinateError;
-		}
+	public void move(Coordinate origin, Coordinate target) {
 		if (origin.diagonalDistance(target) == 2) {
 			Coordinate between = origin.betweenDiagonal(target);
 			this.board.remove(between);
 		}
 		this.board.move(origin, target);
 		this.turn.change();
-		return null;
 	}
-	
-	private Error getErrorInMovement(Coordinate origin, Coordinate target){
+
+	public Error getErrorInMovement(Coordinate origin, Coordinate target){
 		Error coordinateError = getErrorInCoordinates(origin, target);
 		if (coordinateError!= null){
 			return coordinateError;

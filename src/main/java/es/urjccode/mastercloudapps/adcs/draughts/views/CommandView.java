@@ -16,16 +16,19 @@ public class CommandView extends ConsoleView {
         String color = CommandView.COLORS[playController.getColor().ordinal()];
         Error error = null;
         GameView gameView = new GameView();
+        int origin; 
+        int target;
         do {
             String command = this.console.readString(getProposeMessage(color));
-            int origin = Integer.parseInt(command.substring(0, 2));
-            int target = Integer.parseInt(command.substring(3, 5));
-            error = playController.move(getCoordinateFromInt(origin), getCoordinateFromInt(target));
+            origin = Integer.parseInt(command.substring(0, 2));
+            target = Integer.parseInt(command.substring(3, 5));
+            error = playController.getErrorFromMovement(getCoordinateFromInt(origin), getCoordinateFromInt(target));
             if (error != null){
                 console.writeln(new ErrorView().getErrorMessage(error));
-            gameView.write(playController);
             }
         } while (error != null); 
+        playController.move(getCoordinateFromInt(origin), getCoordinateFromInt(target));
+        gameView.write(playController);
         if (playController.isBlocked()){
             this.console.write(MessageView.LOOSER.getMessage());
         }

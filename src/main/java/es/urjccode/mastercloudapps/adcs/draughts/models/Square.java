@@ -12,9 +12,9 @@ class Square {
     }
 
     Piece remove() {
-        Piece piece = this.piece;
+        Piece pieceToRemove = this.piece;
         this.piece = null;
-        return piece;
+        return pieceToRemove;
     }
 
     Piece getPiece() {

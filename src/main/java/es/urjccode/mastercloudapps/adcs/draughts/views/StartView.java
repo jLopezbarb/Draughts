@@ -4,14 +4,13 @@ import es.urjccode.mastercloudapps.adcs.draughts.controllers.StartController;
 
 public class StartView extends ConsoleView {
 
-    private static final String TITTLE = "Draughts";
 
     public StartView(){
         super();
     }
 
     public void interact(StartController startController) {
-        this.console.writeln(StartView.TITTLE);
+        this.console.writeln(MessageView.TITLE.getMessage());
         new GameView().write(startController);
         startController.start();
     }

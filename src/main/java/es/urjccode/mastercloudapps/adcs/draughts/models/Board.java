@@ -48,10 +48,12 @@ class Board {
     }
 
     List<Piece> getPieces(Color color) {
-        List<Piece> pieces = new ArrayList<Piece>();
+        List<Piece> pieces = new ArrayList<>();
         for (int i = 0; i < this.getDimension(); i++) {
             for (int j = 0; j < this.getDimension(); j++) {
-                pieces.add(this.squares[i][j].getPiece());
+                if (this.squares[i][j].getPiece().getColor() == color){
+                    pieces.add(this.squares[i][j].getPiece());
+                }
             }
         }
 		return pieces;

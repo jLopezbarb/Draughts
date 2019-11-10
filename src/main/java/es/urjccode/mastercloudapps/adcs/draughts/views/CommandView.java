@@ -20,7 +20,7 @@ public class CommandView extends ConsoleView {
             String command = this.console.readString(getProposeMessage(color));
             int origin = Integer.parseInt(command.substring(0, 2));
             int target = Integer.parseInt(command.substring(3, 5));
-            error = playController.move(new Coordinate(origin/10-1, origin%10-1), new Coordinate(target/10-1, target%10-1));
+            error = playController.move(getCoordinateFromInt(origin), getCoordinateFromInt(target));
             if (error != null){
                 console.writeln(new ErrorView().getErrorMessage(error));
             gameView.write(playController);
@@ -35,4 +35,7 @@ public class CommandView extends ConsoleView {
         return MessageView.PROPOSE_MOVE.getMessage().replace("#color", color);
     }
 
+    private Coordinate getCoordinateFromInt(int number){
+        return new Coordinate(number/10-1, number%10-1);
+    }
 }

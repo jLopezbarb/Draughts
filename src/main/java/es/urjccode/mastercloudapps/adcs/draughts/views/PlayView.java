@@ -16,7 +16,7 @@ public class PlayView extends ConsoleView {
 
     public void interact(PlayController playController) {
         String color = PlayView.COLORS[playController.getColor().ordinal()];
-        Error error = null;
+        Error error;
         GameView gameView = new GameView();
         Coordinate origin; 
         Coordinate target;

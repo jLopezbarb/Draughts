@@ -1,5 +1,7 @@
 package es.urjccode.mastercloudapps.adcs.draughts.views;
 
+import java.util.regex.Pattern;
+
 import es.urjccode.mastercloudapps.adcs.draughts.controllers.PlayController;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Error;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
@@ -19,9 +21,9 @@ public class CommandView extends ConsoleView {
         int origin; 
         int target;
         do {
-            String command = this.console.readString(getProposeMessage(color));
-            origin = Integer.parseInt(command.substring(0, 2));
-            target = Integer.parseInt(command.substring(3, 5));
+            String userInput = readProposedMovement(color);
+            origin = Integer.parseInt(userInput.substring(0, 2));
+            target = Integer.parseInt(userInput.substring(3, 5));
             error = playController.getErrorFromMovement(getCoordinateFromInt(origin), getCoordinateFromInt(target));
             if (error != null){
                 console.writeln(new ErrorView().getErrorMessage(error));
@@ -40,5 +42,19 @@ public class CommandView extends ConsoleView {
 
     private Coordinate getCoordinateFromInt(int number){
         return new Coordinate(number/10-1, number%10-1);
+    }
+
+    private String readProposedMovement(String color){
+        String regex = "[1-8]{2}.[1-8]{2}";
+        boolean correctInput;
+        String userInput;
+        do{
+            userInput = this.console.readString(getProposeMessage(color));
+            correctInput = Pattern.matches(regex, userInput);
+            if (!correctInput) {
+                console.writeln(new ErrorView().getErrorMessage(Error.BAD_INPUT));
+            }
+        } while (correctInput != true);
+        return userInput;
     }
 }

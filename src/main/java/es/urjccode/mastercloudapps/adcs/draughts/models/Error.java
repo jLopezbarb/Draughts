@@ -8,7 +8,8 @@ public enum Error {
     BAD_DISTANCE("La distancia no es correcta"),
     NOT_EMPTY_TARGET("El destino no está vacío"), 
     NOT_ADVANCED("No se avanza"), 
-    EATING_EMPTY("No se puede comer a nadie");
+    EATING_EMPTY("No se puede comer a nadie"),
+    BAD_INPUT("La entrada no es correcta. Usa XX XX");
 
     private String error;
 	

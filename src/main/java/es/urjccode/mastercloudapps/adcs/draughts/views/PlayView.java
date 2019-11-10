@@ -6,16 +6,16 @@ import es.urjccode.mastercloudapps.adcs.draughts.controllers.PlayController;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Error;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 
-public class CommandView extends ConsoleView {
+public class PlayView extends ConsoleView {
 
     private static final String[] COLORS = {"blancas", "negras"};
 
-    public CommandView(){
+    public PlayView(){
         super();
     }
 
     public void interact(PlayController playController) {
-        String color = CommandView.COLORS[playController.getColor().ordinal()];
+        String color = PlayView.COLORS[playController.getColor().ordinal()];
         Error error = null;
         GameView gameView = new GameView();
         int origin; 

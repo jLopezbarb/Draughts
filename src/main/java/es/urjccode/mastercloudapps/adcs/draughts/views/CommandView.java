@@ -4,7 +4,7 @@ import es.urjccode.mastercloudapps.adcs.draughts.controllers.PlayController;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Error;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 
-public class CommandView extends SubView {
+public class CommandView extends ConsoleView {
 
     private static final String[] COLORS = {"blancas", "negras"};
 

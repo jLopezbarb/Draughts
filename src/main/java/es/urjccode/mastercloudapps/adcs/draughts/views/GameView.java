@@ -4,7 +4,7 @@ import es.urjccode.mastercloudapps.adcs.draughts.controllers.Controller;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Color;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 
-public class GameView extends SubView {
+public class GameView extends ConsoleView {
 
     private static final String[] COLORS = new String[]{"b", "n", " "};
 

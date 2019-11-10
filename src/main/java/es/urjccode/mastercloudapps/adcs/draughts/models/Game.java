@@ -36,40 +36,6 @@ public class Game {
 		return null;
 	}
 
-	private Error getErrorInMovement(Coordinate origin, Coordinate target){
-		assert origin != null && target != null;
-		if (!origin.isValid() || !target.isValid()) {
-			return Error.OUT_COORDINATE;
-		}
-		if (board.isEmpty(origin)) {
-			return Error.EMPTY_ORIGIN;
-		}
-		Color pieceInOriginColor = this.board.getColor(origin);
-		if (this.turn.getColor() != pieceInOriginColor) {
-			return Error.OPPOSITE_PIECE;
-		}
-		if (!origin.isDiagonal(target)) {
-			return Error.NOT_DIAGONAL;
-		}
-		Piece piece = this.board.getPiece(origin);
-		if (!piece.isAdvanced(origin, target)) {
-			return Error.NOT_ADVANCED;
-		}
-		if (origin.diagonalDistance(target) >= 3) {
-			return Error.BAD_DISTANCE;
-		}
-		if (!this.board.isEmpty(target)) {
-			return Error.NOT_EMPTY_TARGET;
-		}
-		if (origin.diagonalDistance(target) == 2) {
-			Coordinate between = origin.betweenDiagonal(target);
-			if (this.board.getPiece(between) == null) {
-				return Error.EATING_EMPTY;
-			}
-		}
-		return null;
-	}
-
 	public Error move(Coordinate origin, Coordinate target) {
 		Error coordinateError = getErrorInMovement(origin, target);
 		if (coordinateError != null){
@@ -81,6 +47,57 @@ public class Game {
 		}
 		this.board.move(origin, target);
 		this.turn.change();
+		return null;
+	}
+	
+	private Error getErrorInMovement(Coordinate origin, Coordinate target){
+		Error coordinateError = getErrorInCoordinates(origin, target);
+		if (coordinateError!= null){
+			return coordinateError;
+		}
+		Error boardError = getErrorInBoard(origin, target);
+		if (boardError != null){
+			return boardError;
+		}
+		return null;
+	}
+
+
+	private Error getErrorInCoordinates(Coordinate origin, Coordinate target){
+		assert origin != null && target != null;
+		if (!origin.isValid() || !target.isValid()) {
+			return Error.OUT_COORDINATE;
+		}
+		if (!origin.isDiagonal(target)) {
+			return Error.NOT_DIAGONAL;
+		}
+		if (origin.diagonalDistance(target) >= 3) {
+			return Error.BAD_DISTANCE;
+		}
+		return null;
+	}
+
+	private Error getErrorInBoard(Coordinate origin, Coordinate target){
+		if (board.isEmpty(origin)) {
+			return Error.EMPTY_ORIGIN;
+		}
+		Color pieceInOriginColor = this.board.getColor(origin);
+		if (this.turn.getColor() != pieceInOriginColor) {
+			return Error.OPPOSITE_PIECE;
+		}
+		Piece piece = this.board.getPiece(origin);
+		if (!piece.isAdvanced(origin, target)) {
+			return Error.NOT_ADVANCED;
+		}
+		if (!this.board.isEmpty(target)) {
+			return Error.NOT_EMPTY_TARGET;
+		}
+		if (origin.diagonalDistance(target) == 2) {
+			Coordinate between = origin.betweenDiagonal(target);
+			if (this.board.getPiece(between) == null) {
+				return Error.EATING_EMPTY;
+			}
+		}
 		return null;
 	}
 

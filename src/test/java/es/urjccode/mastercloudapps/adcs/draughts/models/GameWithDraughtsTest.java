@@ -1,6 +1,7 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,6 +25,9 @@ public class GameWithDraughtsTest {
 
     @InjectMocks
     Game game;
+
+    @Mock
+    Draught draught;
 
     @Before
     public void before(){
@@ -86,7 +90,7 @@ public class GameWithDraughtsTest {
         Coordinate origin = new Coordinate(5, 4);
         Coordinate target = new Coordinate(7, 2);
         Coordinate middle = origin.betweenDiagonal(target);
-        when (turn.getColor()).thenReturn(Color.BLACK);
+        when(turn.getColor()).thenReturn(Color.BLACK);
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.BLACK);
         when(board.getPiece(origin)).thenReturn(piece);
@@ -99,5 +103,18 @@ public class GameWithDraughtsTest {
         verify(board).put(any(Coordinate.class), any(Draught.class));
     }
 
-    
+    @Test
+    public void testGivenGameWhenWhiteDraughtWantsToMoveThenMove() {
+        Coordinate origin = new Coordinate(5, 0);
+        Coordinate target = new Coordinate(3, 2);
+        when(turn.getColor()).thenReturn(Color.WHITE);
+        when(board.isEmpty(origin)).thenReturn(false);
+        when(board.getColor(origin)).thenReturn(Color.WHITE);
+        when(board.getPiece(origin)).thenReturn(draught);
+        when(piece.isCorrect(origin, target, board)).thenReturn(null);
+        when(board.remove(origin)).thenReturn(new Piece(Color.WHITE));
+        when(board.getPiece(target)).thenReturn(draught);
+        game.move(origin, target);
+        verify(board).put(eq(target), any(Draught.class));
+    }
 }

@@ -117,4 +117,20 @@ public class GameWithDraughtsTest {
         game.move(origin, target);
         verify(board).move(origin, target);
     }
+
+    @Test
+    public void testGivenGameWhenWhiteDraughtWantsToMoveReversedThenMove() {
+        Coordinate origin = new Coordinate(3, 2);
+        Coordinate target = new Coordinate(5, 0);
+        when(turn.getColor()).thenReturn(Color.WHITE);
+        when(board.isEmpty(origin)).thenReturn(false);
+        when(board.getColor(origin)).thenReturn(Color.WHITE);
+        when(board.getPiece(origin)).thenReturn(draught);
+        when(board.remove(origin)).thenReturn(draught);
+        when(board.remove(origin.betweenDiagonal(target))).thenReturn(null);
+        when(board.getPiece(target)).thenReturn(draught);
+        game.move(origin, target);
+        verify(board).move(origin, target);
+    }
+
 }

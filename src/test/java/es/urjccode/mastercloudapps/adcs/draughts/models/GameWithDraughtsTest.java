@@ -49,7 +49,7 @@ public class GameWithDraughtsTest {
     }
 
     @Test
-    public void testGivenGameWhenPawnAtLimitAndEatingThenNewDraugts(){
+    public void testGivenGameWhenWhitePawnAtLimitAndEatingThenNewDraugts(){
         Coordinate origin = new Coordinate(2,1);
         Coordinate target = new Coordinate(0,3);
         when (turn.getColor()).thenReturn(Color.WHITE);
@@ -98,4 +98,5 @@ public class GameWithDraughtsTest {
         verify(board).remove(target);
         verify(board).put(any(Coordinate.class), any(Draught.class));
     }
+
 }

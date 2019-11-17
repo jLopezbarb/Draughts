@@ -152,14 +152,13 @@ public class GameWithDraughtsTest {
     public void testGivenGameWhenWhiteDraughtWantsToEatMoreThanOneInOneMovementThenError() {
         Coordinate origin = new Coordinate(2, 3);
         Coordinate target = new Coordinate(5, 0);
+        Draught draughtToCheck = new Draught(Color.WHITE);
         when(turn.getColor()).thenReturn(Color.WHITE);
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.WHITE);
-        when(board.getPiece(origin)).thenReturn(draught);
-        when(board.remove(origin)).thenReturn(draught);
-        when(board.remove(origin.betweenDiagonal(target))).thenReturn(new Pawn(Color.BLACK));
-        when(board.getPiece(target)).thenReturn(draught);
-        game.move(origin, target);
+        when(board.getPiece(origin)).thenReturn(draughtToCheck);
+        when(board.isEmpty(target)).thenReturn(true);
+        draughtToCheck.isCorrect(origin, target, board);
         verify(board).move(origin, target);
     }
 

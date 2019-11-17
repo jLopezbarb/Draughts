@@ -1,10 +1,13 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 
@@ -165,5 +168,12 @@ public class GameWithDraughtsTest {
         assertEquals(Error.TOO_MANY_TO_EAT,error);
     }
 
+    @Test
+    public void testGivenGameWhenWhiteDoesntHavePiecesThenBlocked() {
+        when(turn.getColor()).thenReturn(Color.WHITE);
+        when(board.getPieces(Color.WHITE)).thenReturn(new ArrayList<>());
+        assertTrue(game.isBlocked());
+    }
+    
 
 }

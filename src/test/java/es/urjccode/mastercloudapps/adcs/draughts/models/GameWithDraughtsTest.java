@@ -1,6 +1,7 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -8,6 +9,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 
@@ -180,6 +182,24 @@ public class GameWithDraughtsTest {
         when(turn.getColor()).thenReturn(Color.BLACK);
         when(board.getPieces(Color.BLACK)).thenReturn(new ArrayList<>());
         assertTrue(game.isBlocked());
+    }
+
+    @Test
+    public void testGivenGameWhenBlacktHavePiecesThenNotBlocked() {
+        when(turn.getColor()).thenReturn(Color.BLACK);
+        List<Piece> pieces = new ArrayList<>();
+        pieces.add(new Pawn(Color.BLACK));
+        when(board.getPieces(Color.BLACK)).thenReturn(pieces);
+        assertFalse(game.isBlocked());
+    }
+
+    @Test
+    public void testGivenGameWhenWhitetHavePiecesThenNotBlocked() {
+        when(turn.getColor()).thenReturn(Color.WHITE);
+        List<Piece> pieces = new ArrayList<>();
+        pieces.add(new Pawn(Color.WHITE));
+        when(board.getPieces(Color.WHITE)).thenReturn(pieces);
+        assertFalse(game.isBlocked());
     }
 
 }

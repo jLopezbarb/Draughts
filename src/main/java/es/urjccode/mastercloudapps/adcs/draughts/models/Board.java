@@ -64,7 +64,10 @@ class Board implements PieceProvider {
         List<Piece> pieces = new ArrayList<Piece>();
         for (int i = 0; i < this.getDimension(); i++) {
             for (int j = 0; j < this.getDimension(); j++) {
-                pieces.add(this.squares[i][j].getPiece());
+                Piece piece = this.squares[i][j].getPiece();
+                if (piece != null){
+                    pieces.add(piece);
+                }
             }
         }
 		return pieces;

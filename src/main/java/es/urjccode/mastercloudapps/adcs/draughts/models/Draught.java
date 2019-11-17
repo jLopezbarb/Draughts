@@ -6,4 +6,10 @@ class Draught extends Piece {
         super(color);
     }
 
+    @Override
+    Error isCorrect(Coordinate origin, Coordinate target, PieceProvider pieceProvider) {
+        
+        return null;
+    }
+
 }

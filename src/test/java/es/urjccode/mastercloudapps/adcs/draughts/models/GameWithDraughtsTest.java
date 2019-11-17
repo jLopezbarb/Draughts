@@ -99,4 +99,5 @@ public class GameWithDraughtsTest {
         verify(board).put(any(Coordinate.class), any(Draught.class));
     }
 
+    
 }

@@ -22,15 +22,11 @@ public class Game {
 	private Piece getInitialPiece(Coordinate coordinate) {
 		assert coordinate != null;
 		if (coordinate.isBlack()) {
-			final int row = coordinate.getRow();
-			Color color = null;
-			if (row <= 2) {
-				color = Color.BLACK;
-			} else if (row >= 5) {
-				color = Color.WHITE;
-			}
-			if (color != null) {
-				return new Pawn(color);
+			int row = coordinate.getRow();
+			if (row <= 2){
+				return new Pawn(Color.BLACK);
+			} else if (row >= 5){
+				return new Pawn(Color.WHITE);
 			}
 		}
 		return null;

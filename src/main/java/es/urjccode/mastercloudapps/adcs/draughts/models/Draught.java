@@ -14,7 +14,9 @@ class Draught extends Piece {
 		if (!pieceProvider.isEmpty(target)) {
 			return Error.NOT_EMPTY_TARGET;
 		}
-        //TODO Not eating more than one per move
+        if (this.getNumberOfPiecesInDiagonal(origin, target, pieceProvider) > 1){
+            return Error.TOO_MANY_TO_EAT;
+        }
 		return null;
     }
 
@@ -24,4 +26,13 @@ class Draught extends Piece {
         return letters[this.getColor().ordinal()];
 	}
 
+    public int getNumberOfPiecesInDiagonal(Coordinate origin, Coordinate target, PieceProvider pieceProvider){
+        int numberOfPieces = 0;
+        for (Coordinate coordinateToCheck : origin.betweenDiagonal(target)) {
+            if (pieceProvider.getPiece(coordinateToCheck) != null){
+                numberOfPieces ++;
+            }
+        }
+        return numberOfPieces;
+    }
 }

@@ -8,5 +8,6 @@ public enum Error {
     BAD_DISTANCE,
     NOT_EMPTY_TARGET, 
     NOT_ADVANCED, 
-    EATING_EMPTY;
+    EATING_EMPTY,
+    TOO_MANY_TO_EAT;
 }

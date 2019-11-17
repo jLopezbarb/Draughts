@@ -1,5 +1,6 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -157,9 +158,11 @@ public class GameWithDraughtsTest {
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.WHITE);
         when(board.getPiece(origin)).thenReturn(draughtToCheck);
+        when(board.getPiece(new Coordinate(3, 2))).thenReturn(new Pawn(Color.BLACK));
+        when(board.getPiece(new Coordinate(4, 1))).thenReturn(new Pawn(Color.BLACK));
         when(board.isEmpty(target)).thenReturn(true);
-        draughtToCheck.isCorrect(origin, target, board);
-        verify(board).move(origin, target);
+        Error error = draughtToCheck.isCorrect(origin, target, board);
+        assertEquals(Error.TOO_MANY_TO_EAT,error);
     }
 
 

@@ -32,6 +32,16 @@ class Board implements PieceProvider {
         return this.getSquare(coordinate).remove();
     }
 
+
+    Piece remove(List<Coordinate> coordinateList) {
+        for (Coordinate coordinate : coordinateList) {
+            if (this.getPiece(coordinate) != null){
+                return this.remove(coordinate);
+            }
+        }
+        return null;
+    }
+
     void move(Coordinate origin, Coordinate target) {
         this.put(target, this.remove(origin));
     }

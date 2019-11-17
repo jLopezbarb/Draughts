@@ -8,8 +8,17 @@ class Draught extends Piece {
 
     @Override
     Error isCorrect(Coordinate origin, Coordinate target, PieceProvider pieceProvider) {
-        
-        return null;
+		if (!origin.isDiagonal(target)) {
+			return Error.NOT_DIAGONAL;
+		}
+		if (!pieceProvider.isEmpty(target)) {
+			return Error.NOT_EMPTY_TARGET;
+		}
+		if (!this.isAdvanced(origin, target)) {
+			return Error.NOT_ADVANCED;
+        }
+        //TODO Not eating more than one per move
+		return null;
     }
 
 }

@@ -25,11 +25,14 @@ public class Pawn extends Piece {
 			return Error.BAD_DISTANCE;
 		}
 		if (distance == Pawn.MAX_DISTANCE) {
-			if (pieceProvider.getPiece(origin.betweenDiagonal(target)) == null) {
+			if (pieceProvider.getPiece(this.getPieceBetween(origin, target)) == null) {
 				return Error.EATING_EMPTY;
 			}
 		}
 		return null;
 	}
 
+	Coordinate getPieceBetween(Coordinate origin, Coordinate target){
+		return origin.betweenDiagonal(target).get(0);
+	}
 }

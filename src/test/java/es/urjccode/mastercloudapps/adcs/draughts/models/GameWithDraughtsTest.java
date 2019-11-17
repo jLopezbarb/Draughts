@@ -64,7 +64,7 @@ public class GameWithDraughtsTest {
         when(board.remove(origin)).thenReturn(new Pawn(Color.WHITE));
         when(board.getPiece(target)).thenReturn(new Pawn(Color.WHITE));
         game.move(origin, target);
-        verify(board).remove(origin.betweenDiagonal(target));
+        verify(board).remove(origin.betweenDiagonal(target).get(0));
         verify(board).remove(target);
         verify(board).put(any(Coordinate.class), any(Draught.class));
     }
@@ -89,7 +89,6 @@ public class GameWithDraughtsTest {
     public void testGivenGameWhenBlackPawnEatsAndPositionAtLimitThenNewDraugts(){
         Coordinate origin = new Coordinate(5, 4);
         Coordinate target = new Coordinate(7, 2);
-        Coordinate middle = origin.betweenDiagonal(target);
         when(turn.getColor()).thenReturn(Color.BLACK);
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.BLACK);
@@ -98,7 +97,7 @@ public class GameWithDraughtsTest {
         when(board.remove(origin)).thenReturn(new Pawn(Color.BLACK));
         when(board.getPiece(target)).thenReturn(new Pawn(Color.BLACK));
         game.move(origin, target);
-        verify(board).remove(middle);
+        verify(board).remove(origin.betweenDiagonal(target));
         verify(board).remove(target);
         verify(board).put(any(Coordinate.class), any(Draught.class));
     }
@@ -111,10 +110,11 @@ public class GameWithDraughtsTest {
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.WHITE);
         when(board.getPiece(origin)).thenReturn(draught);
-        when(piece.isCorrect(origin, target, board)).thenReturn(null);
-        when(board.remove(origin)).thenReturn(new Pawn(Color.WHITE));
+        when(draught.isCorrect(origin, target, board)).thenReturn(null);
+        when(board.remove(origin)).thenReturn(draught);
+        when(board.remove(origin.betweenDiagonal(target))).thenReturn(null);
         when(board.getPiece(target)).thenReturn(draught);
         game.move(origin, target);
-        verify(board).put(eq(target), any(Draught.class));
+        verify(board).move(origin, target);
     }
 }

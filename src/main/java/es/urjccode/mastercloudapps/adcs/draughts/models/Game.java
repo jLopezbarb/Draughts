@@ -38,11 +38,12 @@ public class Game {
 
 	public void move(Coordinate origin, Coordinate target) {
 		assert this.isCorrect(origin, target) == null;
-		if (origin.diagonalDistance(target) == 2) {
+		if (origin.diagonalDistance(target) > 1) {
 			this.board.remove(origin.betweenDiagonal(target));
 		}
 		this.board.move(origin, target);
-		if (this.board.getPiece(target).isLimit(target)){
+		Piece piece = this.board.getPiece(target);
+		if (piece.isLimit(target) && piece instanceof Pawn){
 			this.board.remove(target);
 			this.board.put(target, new Draught(Color.WHITE));
 		}

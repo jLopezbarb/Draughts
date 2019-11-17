@@ -14,9 +14,6 @@ class Draught extends Piece {
 		if (!pieceProvider.isEmpty(target)) {
 			return Error.NOT_EMPTY_TARGET;
 		}
-		if (!this.isAdvanced(origin, target)) {
-			return Error.NOT_ADVANCED;
-        }
         //TODO Not eating more than one per move
 		return null;
     }

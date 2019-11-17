@@ -35,4 +35,10 @@ public class Pawn extends Piece {
 	Coordinate getPieceBetween(Coordinate origin, Coordinate target){
 		return origin.betweenDiagonal(target).get(0);
 	}
+
+	@Override
+	public String toString(){
+		final String[] letters = {"b","n"};
+        return letters[this.getColor().ordinal()];
+	}
 }

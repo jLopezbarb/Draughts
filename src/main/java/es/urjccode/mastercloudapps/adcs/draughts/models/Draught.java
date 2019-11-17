@@ -21,4 +21,10 @@ class Draught extends Piece {
 		return null;
     }
 
+    @Override
+	public String toString(){
+		final String[] letters = {"B","N"};
+        return letters[this.getColor().ordinal()];
+	}
+
 }

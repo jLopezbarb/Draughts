@@ -48,7 +48,7 @@ public class Coordinate {
         assert coordinate != null;
         assert this.diagonalDistance(coordinate) > 1;
 
-        List<Coordinate> coordinates_between = new ArrayList();
+        List<Coordinate> coordinates_between = new ArrayList<>();
         Coordinate auxCoordinate = new Coordinate(this.row, this.column);
 
         do{

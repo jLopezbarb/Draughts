@@ -40,13 +40,11 @@ public class GameTest {
 
     private Error advance(Coordinate[][] coordinates){
         Error error = null;
-        System.out.println(game);
         for (int i = 0; i < coordinates.length; i++) {
             assertNull(error);
             error = game.isCorrect(coordinates[i][0], coordinates[i][1]);
             if (error == null){
                 game.move(coordinates[i][0], coordinates[i][1]);
-                System.out.println(game);
             } else {
                 return error;
             }

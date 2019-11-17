@@ -175,5 +175,11 @@ public class GameWithDraughtsTest {
         assertTrue(game.isBlocked());
     }
     
+    @Test
+    public void testGivenGameWhenBlackDoesntHavePiecesThenBlocked() {
+        when(turn.getColor()).thenReturn(Color.BLACK);
+        when(board.getPieces(Color.BLACK)).thenReturn(new ArrayList<>());
+        assertTrue(game.isBlocked());
+    }
 
 }

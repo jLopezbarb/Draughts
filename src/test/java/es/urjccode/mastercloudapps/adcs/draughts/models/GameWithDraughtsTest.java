@@ -185,20 +185,22 @@ public class GameWithDraughtsTest {
     }
 
     @Test
-    public void testGivenGameWhenBlacktHavePiecesThenNotBlocked() {
+    public void testGivenGameWhenBlacktHavePiecesAndCanMoveThenNotBlocked() {
         when(turn.getColor()).thenReturn(Color.BLACK);
         List<Piece> pieces = new ArrayList<>();
         pieces.add(new Pawn(Color.BLACK));
         when(board.getPieces(Color.BLACK)).thenReturn(pieces);
+        when(board.canMove(Color.BLACK)).thenReturn(true);
         assertFalse(game.isBlocked());
     }
 
     @Test
-    public void testGivenGameWhenWhitetHavePiecesThenNotBlocked() {
+    public void testGivenGameWhenWhitetHavePiecesAndCanMoveThenNotBlocked() {
         when(turn.getColor()).thenReturn(Color.WHITE);
         List<Piece> pieces = new ArrayList<>();
         pieces.add(new Pawn(Color.WHITE));
         when(board.getPieces(Color.WHITE)).thenReturn(pieces);
+        when(board.canMove(Color.WHITE)).thenReturn(true);
         assertFalse(game.isBlocked());
     }
 
@@ -208,8 +210,8 @@ public class GameWithDraughtsTest {
         List<Piece> pieces = new ArrayList<>();
         pieces.add(new Pawn(Color.BLACK));
         when(board.getPieces(Color.BLACK)).thenReturn(pieces);
-        when(board.canMove(Color.BLACK)).thenReturn(true);
-        assertFalse(game.isBlocked());
+        when(board.canMove(Color.BLACK)).thenReturn(false);
+        assertTrue(game.isBlocked());
     }
 
 

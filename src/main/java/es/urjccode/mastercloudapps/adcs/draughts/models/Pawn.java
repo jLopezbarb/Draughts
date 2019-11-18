@@ -68,6 +68,7 @@ public class Pawn extends Piece {
 			possibleCoordinates.add(new Coordinate(position.getRow() - 2, position.getColumn() - 2));
 			possibleCoordinates.add(new Coordinate(position.getRow() + 2, position.getColumn() - 2));
 		}
+		possibleCoordinates.removeIf(c -> !this.isLimit(c));
 		return possibleCoordinates;
 	}
 

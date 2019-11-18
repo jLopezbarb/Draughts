@@ -68,7 +68,7 @@ public class Game {
 	}
 
 	public boolean isBlocked() {
-		return this.board.getPieces(this.turn.getColor()).isEmpty() && this.canMove(this.turn.getColor());
+		return this.board.getPieces(this.turn.getColor()).isEmpty() || this.canMove(this.turn.getColor());
 	}
 
 	private boolean canMove(Color color){

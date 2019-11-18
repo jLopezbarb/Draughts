@@ -1,5 +1,7 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Pawn extends Piece {
 
@@ -41,4 +43,33 @@ public class Pawn extends Piece {
 		final String[] letters = {"b","n"};
         return letters[this.getColor().ordinal()];
 	}
+
+	@Override
+	boolean canMove(Coordinate position, PieceProvider pieceProvider) {
+		List<Coordinate> possibleMoves = getPossibleMoves(position, pieceProvider);
+		for (Coordinate coordinate : possibleMoves) {
+			if (this.isCorrect(position, coordinate, pieceProvider) == null){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private List<Coordinate> getPossibleMoves(Coordinate position, PieceProvider pieceProvider){
+		List<Coordinate> possibleCoordinates = new ArrayList<>();
+		if (this.getColor() == Color.WHITE){
+			possibleCoordinates.add(new Coordinate(position.getRow() + 1, position.getColumn() + 1));
+			possibleCoordinates.add(new Coordinate(position.getRow() - 1, position.getColumn() + 1));
+			possibleCoordinates.add(new Coordinate(position.getRow() - 2, position.getColumn() + 2));
+			possibleCoordinates.add(new Coordinate(position.getRow() + 2, position.getColumn() + 2));
+		} else{
+			possibleCoordinates.add(new Coordinate(position.getRow() + 1, position.getColumn() - 1));
+			possibleCoordinates.add(new Coordinate(position.getRow() - 1, position.getColumn() - 1));
+			possibleCoordinates.add(new Coordinate(position.getRow() - 2, position.getColumn() - 2));
+			possibleCoordinates.add(new Coordinate(position.getRow() + 2, position.getColumn() - 2));
+		}
+		return possibleCoordinates;
+	}
+
+
 }

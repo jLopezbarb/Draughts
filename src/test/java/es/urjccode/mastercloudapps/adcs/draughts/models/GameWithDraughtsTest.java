@@ -202,4 +202,15 @@ public class GameWithDraughtsTest {
         assertFalse(game.isBlocked());
     }
 
+    @Test
+    public void testGivenGameWhenBlacktHavePiecesAndCantMoveThenBlocked() {
+        when(turn.getColor()).thenReturn(Color.BLACK);
+        List<Piece> pieces = new ArrayList<>();
+        pieces.add(new Pawn(Color.BLACK));
+        when(board.getPieces(Color.BLACK)).thenReturn(pieces);
+        when(board.canMove(Color.BLACK)).thenReturn(true);
+        assertFalse(game.isBlocked());
+    }
+
+
 }

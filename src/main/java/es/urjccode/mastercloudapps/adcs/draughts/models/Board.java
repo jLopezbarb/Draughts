@@ -109,4 +109,18 @@ class Board implements PieceProvider {
         return string + row + "\n";
     }
 
+	public boolean canMove(Color color) {
+        for (int i = 0; i < this.getDimension(); i++) {
+            for (int j = 0; j < this.getDimension(); j++) {
+                Piece piece = this.squares[i][j].getPiece();
+                if (piece != null){
+                    if (!piece.canMove(new Coordinate(i, j), this)){
+                        return false;
+                    }
+                }
+            }
+        }
+		return true;
+	}
+
 }

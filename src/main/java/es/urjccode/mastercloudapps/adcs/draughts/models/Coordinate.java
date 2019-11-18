@@ -7,8 +7,8 @@ public class Coordinate {
 
     private int row;
     private int column;
-    private static final int LOWER_LIMIT = 0;
-    private static final int UPPER_LIMIT = 7;
+    static final int LOWER_LIMIT = 0;
+    static final int UPPER_LIMIT = 7;
 
     public Coordinate(int row, int column) {
         this.row = row;

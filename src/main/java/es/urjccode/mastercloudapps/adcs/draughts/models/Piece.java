@@ -30,4 +30,5 @@ public abstract class Piece {
 
 	abstract Error isCorrect(Coordinate origin, Coordinate target, PieceProvider pieceProvider);
 
+	abstract boolean canMove(Coordinate position, PieceProvider pieceProvider);
 }
